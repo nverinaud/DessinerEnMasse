@@ -3,12 +3,10 @@
  * Module dependencies.
  */
 
-var express = require('express')
+var express = require('express.io')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path')
-  , io = require('socket.io')
-  , server = null;
+  , path = require('path');
 
 var app = express();
 app.http().io();
@@ -32,14 +30,26 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 // server = http.createServer(app);
-app.listen(app.get('port'), function(){
+app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-io = io.listen(app);
+var lines = [];
 
-io.on('connection', function (socket) {
-	console.log("New client");
+app.io.on('connection', function (socket) {
 
-	socket.emit('Welcome');
+	lines.forEach(function (line) {
+		socket.emit('draw:line', line);
+	});
+	
+	socket.on('draw:line', function (line) {
+		lines.push(line);
+		socket.broadcast.emit('draw:line', line);
+	});
+
+	socket.on('draw:clear', function () {
+		lines = [];
+		socket.broadcast.emit('draw:clear');
+	});
+
 });

@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  canvas#draw-space(width=500, height=500)
+	canvas#draw-space(width=500, height=500)
+	input#clear-btn(type="button", value="clear")
 
-  script(src="/socket.io/socket.io.js")
-  script(src="/js/client.js")
+	script(src="/socket.io/socket.io.js")
+	script(src="/js/client.js")
