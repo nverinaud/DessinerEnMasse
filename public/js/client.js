@@ -34,7 +34,7 @@
 		event.preventDefault();
 		if (mouseDown)
 		{
-			handleUserDrawAtPosition(event.x, event.y);
+			handleUserDrawAtPosition(event.clientX, event.clientY);
 		}
 	});
 
