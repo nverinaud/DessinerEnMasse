@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  canvas#draw-space(width=500, height=500)
+
+  script(src="/socket.io/socket.io.js")
+  script(src="/js/client.js")
