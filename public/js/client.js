@@ -38,8 +38,8 @@
 		}
 	});
 
-	socket.on('draw:line', function (line) {
-		drawLine(line, "rgb(255, 0, 255)");
+	socket.on('draw:line', function (data) {
+		drawLine(data.line, data.color);
 	});
 
 	socket.on('draw:clear', function () {
@@ -63,9 +63,9 @@
 		}
 
 		var line = new Line([x1, y1], [x2, y2]);
-		drawLine(line, "rgb(0, 0, 0)");
+		drawLine(line, currentColor);
 
-		socket.emit('draw:line', line);
+		socket.emit('draw:line', {line:line, color:currentColor});
 	}
 
 	function drawLine(line, color)
@@ -118,3 +118,31 @@
 	}
 
 })();
+
+//Color management
+var red = document.getElementById('slide-red').value;
+var	green = document.getElementById('slide-green').value;
+var blue = document.getElementById('slide-blue').value;
+var currentColor;
+
+changeBackgroundColor(red,green, blue);
+
+function onRedChanged(value) {
+    red = value;
+    changeBackgroundColor(red, green, blue);
+}
+
+function onGreenChanged(value) {
+    green = value;
+    changeBackgroundColor(red, green, blue);
+}
+function onBlueChanged(value) {
+    blue = value;
+    changeBackgroundColor(red, green, blue);
+}
+function changeBackgroundColor(red, green, blue) {
+    var color = "rgb(" + red + ", " + green + ", " + blue + ")";
+    var box = document.getElementById('color-box');
+    currentColor = color;
+    box.setAttribute("style","background-color:"+color+";width:50px;height:50px;");
+}
