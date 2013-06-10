@@ -117,32 +117,37 @@
 		this.y = y;
 	}
 
+	//Color management
+	var redSlide = document.getElementById('slide-red');
+	var greenSlide = document.getElementById('slide-green');
+	var blueSlide = document.getElementById('slide-blue');
+	var red = redSlide.value;
+	var	green = greenSlide.value;
+	var blue = blueSlide.value;
+	var currentColor;
+
+	redSlide.addEventListener('change', function(){
+		red = redSlide.value;
+	    changeBackgroundColor(red, green, blue);
+	});
+
+	greenSlide.addEventListener('change', function(){
+		green = greenSlide.value;
+	    changeBackgroundColor(red, green, blue);
+	});
+
+	blueSlide.addEventListener('change', function(){
+		blue = blueSlide.value;
+	    changeBackgroundColor(red, green, blue);
+	});
+
+	changeBackgroundColor(red,green, blue);
+
+	function changeBackgroundColor(red, green, blue) {
+	    var color = "rgb(" + red + ", " + green + ", " + blue + ")";
+	    var box = document.getElementById('color-box');
+	    currentColor = color;
+	    box.setAttribute("style","background-color:"+color+";width:50px;height:50px;");
+	}
+
 })();
-
-//Color management
-var red = document.getElementById('slide-red').value;
-var	green = document.getElementById('slide-green').value;
-var blue = document.getElementById('slide-blue').value;
-var currentColor;
-
-changeBackgroundColor(red,green, blue);
-
-function onRedChanged(value) {
-    red = value;
-    changeBackgroundColor(red, green, blue);
-}
-
-function onGreenChanged(value) {
-    green = value;
-    changeBackgroundColor(red, green, blue);
-}
-function onBlueChanged(value) {
-    blue = value;
-    changeBackgroundColor(red, green, blue);
-}
-function changeBackgroundColor(red, green, blue) {
-    var color = "rgb(" + red + ", " + green + ", " + blue + ")";
-    var box = document.getElementById('color-box');
-    currentColor = color;
-    box.setAttribute("style","background-color:"+color+";width:50px;height:50px;");
-}

@@ -9,15 +9,15 @@ block content
 		div
 			p.
 				RED
-			input#slide-red(type="range", min="0", max="255", onchange="onRedChanged(this.value)")
+			input#slide-red(type="range", min="0", max="255")
 		div
 			p.
 				GREEN
-			input#slide-green(type="range", min="0", max="255", onchange="onGreenChanged(this.value)")
+			input#slide-green(type="range", min="0", max="255")
 		div
 			p.
 				BLUE
-			input#slide-blue(type="range", min="0", max="255", onchange="onBlueChanged(this.value)")
+			input#slide-blue(type="range", min="0", max="255")
 
 	script(src="/socket.io/socket.io.js")
 	script(src="/js/client.js")
